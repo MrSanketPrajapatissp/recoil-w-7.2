@@ -1,35 +1,36 @@
-import { useContext, useState } from "react";
-import { CountContext } from "./components/context";
+import { useRecoilState, useRecoilValue, RecoilRoot } from "recoil";
+import { countAtom } from "./store/atom/count";
 
 // Propdrilling
 
 function App() {
-  const [count, setCount] = useState(0);
   return (
     <div>
-      <CountContext.Provider value={count}>
-        <Count count={count} setCount={setCount} />
-      </CountContext.Provider>
+      <RecoilRoot>
+        <Count />
+      </RecoilRoot>
     </div>
   );
 }
 
-function Count({ setCount }) {
+function Count() {
+  console.log("count re-render");
   return (
     <div>
       <CountRenderer />
-      <Buttons setCount={setCount} />
+      <Buttons />
     </div>
   );
 }
 
 function CountRenderer() {
-  const count = useContext(CountContext);
+  const count = useRecoilValue(countAtom);
   return <div>{count}</div>;
 }
 
-function Buttons({ setCount }) {
-  const count = useContext(CountContext);
+function Buttons() {
+  const [count, setCount] = useRecoilState(countAtom);
+
   return (
     <div>
       <button
