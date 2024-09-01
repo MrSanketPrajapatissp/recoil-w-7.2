@@ -4,7 +4,8 @@ import {
   RecoilRoot,
   useSetRecoilState,
 } from "recoil";
-import { countAtom } from "./store/atom/count";
+import { countAtom, evenSelector } from "./store/atom/count";
+import { useMemo } from "react";
 
 // Propdrilling
 
@@ -30,7 +31,19 @@ function Count() {
 
 function CountRenderer() {
   const count = useRecoilValue(countAtom);
-  return <div>{count}</div>;
+  return (
+    <div>
+      <div>{count}</div>
+      <EventCountRender />
+    </div>
+  );
+}
+
+function EventCountRender() {
+  // const count = useRecoilValue(countAtom);
+  const isEven = useRecoilValue(evenSelector);
+
+  return <div>{isEven ? "It is even" : null}</div>;
 }
 
 function Buttons() {
