@@ -12,3 +12,12 @@ export const evenSelector = selector({
     return count % 2 == 0;
   },
 });
+
+export const filterTodos = selector({
+  key: "filterTodos",
+  get: (props) => {
+    const todos = props.get(todoAtom);
+    const filter = props.get(filtertodo);
+    return todos.filter(x => x.title.includes(filter) || x.description.includes(filter))
+  }
+})
