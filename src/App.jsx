@@ -1,4 +1,9 @@
-import { useRecoilState, useRecoilValue, RecoilRoot } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  RecoilRoot,
+  useSetRecoilState,
+} from "recoil";
 import { countAtom } from "./store/atom/count";
 
 // Propdrilling
@@ -29,20 +34,23 @@ function CountRenderer() {
 }
 
 function Buttons() {
-  const [count, setCount] = useRecoilState(countAtom);
-
+  const setCount = useSetRecoilState(countAtom);
+  console.log("Button rendering"); /// this statement not rendering again when the count changes or buttons are not rendering again on screen
   return (
     <div>
       <button
         onClick={() => {
-          setCount(count + 1);
+          setCount((count) => count + 1);
         }}
       >
         Increase
       </button>
       <button
         onClick={() => {
-          setCount(count - 1);
+          setCount(function (c) {
+            // the arrow function syntax and this syntax works the same
+            return c - 1;
+          });
         }}
       >
         Decrease
