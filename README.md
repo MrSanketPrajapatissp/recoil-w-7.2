@@ -1,4 +1,4 @@
-#Output of the Code: 
+# Output of the Code: 
 
 
 ![Screenshot (422)](https://github.com/user-attachments/assets/471dc1ce-3fd2-4133-9940-7bbb0d608a89)
